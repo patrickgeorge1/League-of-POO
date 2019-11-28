@@ -37,6 +37,7 @@ public class Game {
             Champion player = ChampFactory.getInstance().getChampById(i);
             player.clearDamage();
 
+            // se bate cu inamicul
             if((!fought.contains(i)) && player.getEnemy() != null) {
                 fought.add(i);
                 fought.add(player.getEnemy().getId());
@@ -56,6 +57,9 @@ public class Game {
                     player.setEnemy(null);
                     enemy.setEnemy(null);
                 }
+            } else {
+                // nu se bate si ia doar rot
+                player.rot();
             }
         }
     }
@@ -79,6 +83,8 @@ public class Game {
         System.out.println(player.getHp());
         System.out.println(enemy.getHp());
         System.out.println("\n\n");
+
+        // TODO ai grija unde aplici rot
 
 
         player.clearDamage();

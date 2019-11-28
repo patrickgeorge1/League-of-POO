@@ -1,6 +1,8 @@
 package champions;
 
 import abilities.Ability;
+import abilities.Deflect;
+import abilities.Drain;
 import map.Map;
 
 public class Wizard extends Champion {
@@ -22,7 +24,10 @@ public class Wizard extends Champion {
 
     @Override
     public void fight(Champion enemy, Map map) {
-
+        Drain drain = new Drain();
+        Deflect deflect = new Deflect();
+        enemy.accept(drain, map);
+        enemy.accept(deflect, map);
     }
 
     public void accept(Ability ability, Map map) {

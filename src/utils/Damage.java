@@ -1,5 +1,7 @@
 package utils;
 
+import champions.Champion;
+
 import java.util.ArrayList;
 
 public class Damage {
@@ -7,6 +9,7 @@ public class Damage {
     private float land_modifier;
     private float race_modifier;
     private int damageWithBonuses;
+    private int damageJustWithLand;
     private ArrayList<Float> extra_modifier = new ArrayList<>();
 
     public Damage(int baseDamage, float land_modifier, float race_modifier) {
@@ -18,6 +21,7 @@ public class Damage {
 
     public int getDamageWithLandModifier() {
         damageWithBonuses = Math.round(baseDamage * land_modifier);
+        damageJustWithLand = damageWithBonuses;
         return damageWithBonuses;
     }
 
@@ -36,7 +40,22 @@ public class Damage {
         return damageWithBonuses;
     }
 
+    public int getDamageForDrain(float procent, float race_modifier, float land_modifier, int currentHp, int maxHp) {
+        float procentOfRaceAndLevel = procent * land_modifier * race_modifier;
+        float minimum = java.lang.Math.min(0.3f * maxHp, currentHp);
+        this.baseDamage = Math.round(procent  * minimum);
+        this.land_modifier = land_modifier;
+        damageWithBonuses = Math.round(procentOfRaceAndLevel * minimum);
+        return damageWithBonuses;
+    }
 
+    public int getDamageJustWithLand() {
+        return damageJustWithLand;
+    }
+
+    public void setDamageJustWithLand(int damageJustWithLand) {
+        this.damageJustWithLand = damageJustWithLand;
+    }
     public int getBaseDamage() {
         return baseDamage;
     }
