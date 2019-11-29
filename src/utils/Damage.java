@@ -35,6 +35,11 @@ public class Damage {
         return damageWithBonuses;
     }
 
+    public int getDamageWithBothModifiersUpgraded() {
+        damageWithBonuses = Math.round(baseDamage * land_modifier * race_modifier);
+        return damageWithBonuses;
+    }
+
     public int getDamageWithBothModifiersAndCrit() {
         damageWithBonuses = Math.round(getDamageWithBothModifiers() * extra_modifier.get(0));
         return damageWithBonuses;

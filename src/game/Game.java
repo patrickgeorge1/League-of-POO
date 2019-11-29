@@ -4,6 +4,7 @@ import champions.Champion;
 import factories.ChampFactory;
 import map.Map;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -107,18 +108,32 @@ public class Game {
         }
     }
 
-    public void play() {
+    public void play(String path, String pathToPrint) throws IOException{
         int roundNumber = 0;
-        for (String movement:movements) {
+        for (String movement : movements) {
             playRound(movement);
             roundNumber++;
         }
+        String content = "";
         for (int i = 0; i < playerNumber; i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
-            if (player.getHp() <= 0) System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " dead");
-            else System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY());
+            if (player.getHp() <= 0) {
+//                System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " dead");
+                content += ChampFactory.getInstance().getChampionForOutput(i) + " dead\n";
+            }
+            else {
+//                System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY());
+                content += ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY() + "\n";
+            }
         }
+//        System.out.println(content);
+        PrintWriter writer = new PrintWriter(pathToPrint, "UTF-8");
+        writer.println(content);
+        writer.close();
+
+
     }
+
 
 
     public int getRoundNumber() {
