@@ -18,6 +18,3 @@ public class Main {
         game.play();
     }
 }
-
-//            K 0 0 260 0 0
-//            K 0 0 260 0 0
