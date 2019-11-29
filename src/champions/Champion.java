@@ -1,6 +1,7 @@
 package champions;
 
 import abilities.Ability;
+import factories.ChampFactory;
 import map.Map;
 import utils.Damage;
 import utils.Position;
@@ -43,7 +44,7 @@ public abstract class Champion {
 
     // root the victim and tell us if it s dead after rooting's effect
     public boolean rot() {
-        if(negativeBuff.isEmpty()) return false;
+        if(negativeBuff.isEmpty() || getHp() <= 0) return false;
         else {
             int nr_of_rounds = negativeBuff.get(0);
             int damage = negativeBuff.get(1);
@@ -59,32 +60,46 @@ public abstract class Champion {
     }
 
     // tell me where from where to where should a champ move
-    public ArrayList<TupleInt> whereShouldHeMove(String direction) {
+    public ArrayList<TupleInt> whereShouldHeMove(char direction) {
         ArrayList<TupleInt> result = new ArrayList<>();
         int x = position.getX();
         int x_old = x;
         int y = position.getY();
         int y_old = y;
-        if (direction.equals("W")) {
-            y--;
-        } else {
-            if (direction.equals("E")) {
+        switch (direction) {
+            case 'L':
+                 y--;
+                break;
+            case 'R':
                 y++;
-            } else {
-                if (direction.equals("N")) {
-                    x--;
-                } else {
-                    if (direction.equals("S")) x++;
-                }
-            }
+                break;
+            case 'U':
+                x--;
+                break;
+            case 'D':
+                x++;
+                break;
+            default:
+                break;
         }
+        String symbol = ChampFactory.getInstance().getChampionForOutput(getId());
+        if (getHp() > 0) System.out.println(" Mutare:  " + symbol + getId() + " se duce la " + x + " " + y);
         result.add(new TupleInt(x_old, y_old));
         result.add(new TupleInt(x, y));
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("player " + getId() + " se va muta pe " + x + " " + y);
         return result;
     }
 
     public char getTerrain(Map map) {
         return map.getTerrain(position.getX(), position.getY());
+    }
+
+    public void deleteMeFromMap(Map map) {
+        int x = position.getX();
+        int y = position.getY();
+        map.getMap().get(x).get(y).getPlayers().remove(Integer.valueOf(getId()));
     }
 
     abstract public void resetHP();
@@ -114,7 +129,7 @@ public abstract class Champion {
         this.hp = hp;
     }
 
-    public ArrayList<Integer> getNegativeBuff() {
+    public ArrayList<Integer> getNegativeNegativeBuff() {
         return negativeBuff;
     }
 
@@ -139,8 +154,16 @@ public abstract class Champion {
         for (Damage damage:damage) {
             res += damage.getDamageWithBonuses();
         }
-        System.out.println("tot damage dat de " + getId() + " : " + res + " \n");
         return res;
+    }
+
+    public void decreaseIncapacity() {
+        if (!incapacity.isEmpty()) {
+            int number_of_incapacity = incapacity.get(0);
+            incapacity.remove(0);
+            number_of_incapacity--;
+            if (number_of_incapacity > 0) incapacity.add(number_of_incapacity);
+        }
     }
 
     public Position getPosition() {

@@ -1,13 +1,26 @@
 package champions;
 
 import abilities.Ability;
+import abilities.Backstab;
+import abilities.Paralysis;
 import map.Map;
 
 public class Rogue extends Champion {
+    private int critCycle;
     public Rogue(int id) {
         super(id);
         setPriorityToAttck(1);
         resetHP();
+        critCycle = 0;
+    }
+
+    public void increseCritCycle() {
+        this.critCycle++;
+    }
+
+    public boolean critNow(Map map) {
+        if (critCycle % 3 == 0 && this.getTerrain(map) == 'W') System.out.println("Backstab crittt");
+        return (critCycle % 3 == 0 && this.getTerrain(map) == 'W');
     }
 
     @Override
@@ -22,7 +35,18 @@ public class Rogue extends Champion {
 
     @Override
     public void fight(Champion enemy, Map map) {
+        Backstab backstab = new Backstab();
+        Paralysis paralysis = new Paralysis();
+        enemy.accept(backstab, map);
+        enemy.accept(paralysis, map);
+    }
 
+    public int getCritCycle() {
+        return critCycle;
+    }
+
+    public void setCritCycle(int critCycle) {
+        this.critCycle = critCycle;
     }
 
     public void accept(Ability ability, Map map) {

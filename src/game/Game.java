@@ -26,19 +26,22 @@ public class Game {
         // fac mutarile
         for (int i = 0; i < movement.length(); i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
+
+            // DOT damage
+            player.rot();
             char letter = movement.charAt(i);
-            String move = String.valueOf(letter);
-            world.move(i, player.whereShouldHeMove(move));
+            world.move(i, player.whereShouldHeMove(letter));
+            // reduc incapacitatea
+            player.decreaseIncapacity();
         }
 
-        System.out.println("Incepe RUNDA : ");
         Set<Integer> fought = new HashSet<>();
         for (int i = 0; i < playerNumber; i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
             player.clearDamage();
 
-            // se bate cu inamicul
-            if((!fought.contains(i)) && player.getEnemy() != null) {
+            // traiesc, nu am luptat, am inamic in casuta
+            if(player.getHp() > 0 && (!fought.contains(i)) && player.getEnemy() != null) {
                 fought.add(i);
                 fought.add(player.getEnemy().getId());
 
@@ -52,36 +55,35 @@ public class Game {
                     player = aux;
                 }
                 combat2Champs(player, enemy);
-                // daca unul moare nu o sa mai fie inamici
-                if (player.getHp() <= 0 || enemy.getHp() <= 0) {
-                    player.setEnemy(null);
-                    enemy.setEnemy(null);
-                }
+
             } else {
-                // nu se bate si ia doar rot
-                player.rot();
+                System.out.println("" + i + " nu se bate");
             }
+
         }
+        System.out.println("cei care s au batut " + fought);
     }
 
     public void combat2Champs(Champion player, Champion enemy) {
         System.out.println();
         System.out.println("-------Se bate " + player.getId() + " cu " + enemy.getId() + " | hp inainte de bataie :");
-        System.out.println(player.getHp());
-        System.out.println(enemy.getHp());
+        System.out.println(player.getId() + " lupta cu " + player.getHp() + " hp");
+        System.out.println(enemy.getId()+ " lupta cu " + enemy.getHp() + " hp");
         System.out.println("-------------------- dupa bataie :  \n");
-
-        player.rot();
-        enemy.rot();
+        // in caz ca erau inamici dar i a omorat root ul
         if (player.getHp() <= 0 || enemy.getHp() <= 0) {
+            if (player.getHp() <= 0) player.deleteMeFromMap(world);
+            if (enemy.getHp() <= 0) enemy.deleteMeFromMap(world);
+            player.setEnemy(null);
+            enemy.setEnemy(null);
             return;
         }
         player.fight(enemy, world);
         enemy.fight(player, world);
         enemy.setHp(enemy.getHp() - player.summAllTheDamage());
         player.setHp(player.getHp() - enemy.summAllTheDamage());
-        System.out.println(player.getHp());
-        System.out.println(enemy.getHp());
+        System.out.println(player.getId() + " a ramas cu " + player.getHp() + " hp");
+        System.out.println(enemy.getId()+ " a ramas cu " + enemy.getHp() + " hp");
         System.out.println("\n\n");
 
         // TODO ai grija unde aplici rot
@@ -90,28 +92,50 @@ public class Game {
         player.clearDamage();
         enemy.clearDamage();
         //  dau xp la winner si resetez HP
-        if (player.getHp() <= 0) {
+        if (player.getHp() <= 0 && enemy.getHp() > 0) {
+            enemy.setEnemy(null);
+            player.setEnemy(null);
+            player.deleteMeFromMap(world);
+
             int enemy_old_level = enemy.getLevel();
             enemy.setXp(enemy.getXp() + enemy.getXpFrom(player));
             if (enemy_old_level < enemy.getLevel()) enemy.resetHP();
         }
 
-        if (enemy.getHp() <= 0) {
+        if (enemy.getHp() <= 0 && player.getHp() > 0) {
+            enemy.setEnemy(null);
+            player.setEnemy(null);
+            enemy.deleteMeFromMap(world);
+
             int player_old_level = player.getLevel();
             player.setXp(player.getXp() + player.getXpFrom(enemy));
             if (player_old_level < player.getLevel()) player.resetHP();
         }
+
+        if (enemy.getHp() <= 0 && player.getHp() <= 0) {
+            enemy.setEnemy(null);
+            player.setEnemy(null);
+            enemy.deleteMeFromMap(world);
+            player.deleteMeFromMap(world);
+        }
     }
 
     public void play() {
+        int roundNumber = 0;
         for (String movement:movements) {
+            System.out.println();
+            System.out.println("<<<<<<<<<<<<<<<<Incepe RUNDA (" + movement + ")  " + roundNumber + ">>>>>>>>>>>>>>" );
             playRound(movement);
+            roundNumber++;
         }
         for (int i = 0; i < playerNumber; i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
             if (player.getHp() <= 0) System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " dead");
             else System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY());
         }
+//        System.out.println();
+//        Champion player = ChampFactory.getInstance().getChampById(0);
+//        System.out.println(player);
     }
 
 

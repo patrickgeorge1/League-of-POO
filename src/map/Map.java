@@ -53,37 +53,33 @@ public class Map {
     // apelez move(id, champ.whereShouldImove("w"))
     public void move(int id, ArrayList<TupleInt> coord) {
         Champion me = ChampFactory.getInstance().getChampById(id);
-        if (me.getIncapacity().isEmpty()) {
-            int x = coord.get(0).getFirst();
-            int y = coord.get(0).getSecond();
-            int xx = coord.get(1).getFirst();
-            int yy = coord.get(1).getSecond();
+        // doar daca nu s mort ma pot misca
+        if (me.getHp() > 0) {
+            // daca pot sa ma misc
+            if (me.getIncapacity().isEmpty()) {
+                int x = coord.get(0).getFirst();
+                int y = coord.get(0).getSecond();
+                int xx = coord.get(1).getFirst();
+                int yy = coord.get(1).getSecond();
 
+                map.get(x).get(y).getPlayers().remove(Integer.valueOf(id));
+                // daca aveam inamic si l am abandonat, nu o sa i mai fiu inamic
+                if (me.getEnemy() != null) {
+                    me.getEnemy().setEnemy(null);
+                }
+                me.setEnemy(null);
 
-            map.get(x).get(y).getPlayers().remove(Integer.valueOf(id));
-            // a ramas vechiul inamic singur, ii  impac
-            if (!map.get(x).get(y).getPlayers().isEmpty()) {
-                int EnemyId = map.get(x).get(y).getPlayers().get(0);
-                Champion enemy = ChampFactory.getInstance().getChampById(EnemyId);
-                enemy.setEnemy(null);
+                // ajunge langa un inamic
+                if (!map.get(xx).get(yy).getPlayers().isEmpty()) {
+                    int EnemyId = map.get(xx).get(yy).getPlayers().get(0);
+                    Champion enemy = ChampFactory.getInstance().getChampById(EnemyId);
+                    me.setEnemy(enemy);
+                    enemy.setEnemy(me);
+                }
+                map.get(xx).get(yy).getPlayers().add(id);
+                Position new_positon = new Position(xx, yy);
+                me.setPosition(new_positon);
             }
-            ChampFactory.getInstance().getChampById(id).setEnemy(null);
-
-            // ajunge langa un inamic
-            if (!map.get(xx).get(yy).getPlayers().isEmpty()) {
-                int EnemyId = map.get(xx).get(yy).getPlayers().get(0);
-                Champion enemy = ChampFactory.getInstance().getChampById(EnemyId);
-                ChampFactory.getInstance().getChampById(id).setEnemy(enemy);
-                enemy.setEnemy(me);
-            }
-            map.get(xx).get(yy).getPlayers().add(id);
-            Position new_positon = new Position(x, y);
-            ChampFactory.getInstance().getChampById(id).setPosition(new_positon);
-        } else {
-            int nr_of_rounds = me.getIncapacity().get(0);
-            nr_of_rounds--;
-            me.getIncapacity().remove(0);
-            if (nr_of_rounds != 0) me.getIncapacity().add(nr_of_rounds);
         }
     }
 
