@@ -75,7 +75,6 @@ public class Deflect implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBothModifiers();
-        System.out.println("Deflect : " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

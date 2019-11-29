@@ -65,7 +65,6 @@ public class Slam implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBothModifiers();
-        System.out.println("Slam : " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

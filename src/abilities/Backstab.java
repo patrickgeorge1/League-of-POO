@@ -55,7 +55,7 @@ public class Backstab implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         ((Rogue) me).increseCritCycle();
-        System.out.println("BackStab : " + damage.getDamageWithBothModifiers());
+        damage.getDamageWithBothModifiers();
         me.addDamage(damage);
     }
 }

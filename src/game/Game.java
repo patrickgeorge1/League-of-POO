@@ -56,20 +56,12 @@ public class Game {
                 }
                 combat2Champs(player, enemy);
 
-            } else {
-                System.out.println("" + i + " nu se bate");
             }
 
         }
-        System.out.println("cei care s au batut " + fought);
     }
 
     public void combat2Champs(Champion player, Champion enemy) {
-        System.out.println();
-        System.out.println("-------Se bate " + player.getId() + " cu " + enemy.getId() + " | hp inainte de bataie :");
-        System.out.println(player.getId() + " lupta cu " + player.getHp() + " hp");
-        System.out.println(enemy.getId()+ " lupta cu " + enemy.getHp() + " hp");
-        System.out.println("-------------------- dupa bataie :  \n");
         // in caz ca erau inamici dar i a omorat root ul
         if (player.getHp() <= 0 || enemy.getHp() <= 0) {
             if (player.getHp() <= 0) player.deleteMeFromMap(world);
@@ -82,11 +74,6 @@ public class Game {
         enemy.fight(player, world);
         enemy.setHp(enemy.getHp() - player.summAllTheDamage());
         player.setHp(player.getHp() - enemy.summAllTheDamage());
-        System.out.println(player.getId() + " a ramas cu " + player.getHp() + " hp");
-        System.out.println(enemy.getId()+ " a ramas cu " + enemy.getHp() + " hp");
-        System.out.println("\n\n");
-
-        // TODO ai grija unde aplici rot
 
 
         player.clearDamage();
@@ -123,8 +110,6 @@ public class Game {
     public void play() {
         int roundNumber = 0;
         for (String movement:movements) {
-            System.out.println();
-            System.out.println("<<<<<<<<<<<<<<<<Incepe RUNDA (" + movement + ")  " + roundNumber + ">>>>>>>>>>>>>>" );
             playRound(movement);
             roundNumber++;
         }
@@ -133,9 +118,6 @@ public class Game {
             if (player.getHp() <= 0) System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " dead");
             else System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY());
         }
-//        System.out.println();
-//        Champion player = ChampFactory.getInstance().getChampById(0);
-//        System.out.println(player);
     }
 
 

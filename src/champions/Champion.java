@@ -51,7 +51,6 @@ public abstract class Champion {
             nr_of_rounds--;
             negativeBuff.set(0, nr_of_rounds);
             this.hp -= damage;
-            System.out.println("Player " + getId() + " root -"+damage + " si mai are doar " + getHp() + " hp");
             // daca s-a terminat bufful negativ
             if (nr_of_rounds == 0) this.setNegativeBuff(new ArrayList<>());
         }
@@ -83,12 +82,8 @@ public abstract class Champion {
                 break;
         }
         String symbol = ChampFactory.getInstance().getChampionForOutput(getId());
-        if (getHp() > 0) System.out.println(" Mutare:  " + symbol + getId() + " se duce la " + x + " " + y);
         result.add(new TupleInt(x_old, y_old));
         result.add(new TupleInt(x, y));
-//        System.out.println();
-//        System.out.println();
-//        System.out.println("player " + getId() + " se va muta pe " + x + " " + y);
         return result;
     }
 

@@ -72,7 +72,6 @@ public class Ignite implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBothModifiers();
-        System.out.println("Ignite : " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

@@ -118,7 +118,6 @@ public class Paralysis implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBothModifiers();
-        System.out.println("Paralysis : " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

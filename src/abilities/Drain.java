@@ -71,7 +71,6 @@ public class Drain implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBonuses();
-        System.out.println("Drain : " + damage.getDamageWithBonuses());
         me.addDamage(damage);
     }
 }

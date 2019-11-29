@@ -44,7 +44,6 @@ public class Execute implements Ability {
         int victimCurrentHp = knight.getHp();
         int victimTreshHoldHp = Math.round(hpLimit * victimMaxHp / 100.0f);
         if (victimCurrentHp <= victimTreshHoldHp) {
-            System.out.println("EXXXECCECUUTTEE !!! victimCurrent: " + victimCurrentHp + " victim treshHold: " + victimTreshHoldHp);
             baseDamage = victimCurrentHp;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map), KnightModifiers.execute_knight);
@@ -77,7 +76,6 @@ public class Execute implements Ability {
         if (victimCurrentHp <= victimTreshHoldHp) {
             baseDamage = victimCurrentHp;
         }
-        System.out.println("                        vs pyro " + baseDamage + " " + getLandMofifier(me, map) + " " + KnightModifiers.execute_pyromancer);
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map), KnightModifiers.execute_pyromancer);
         cast(damage, pyromancer, me);
     }
@@ -85,7 +83,6 @@ public class Execute implements Ability {
     @Override
     public void cast(Damage damage, Champion enemy, Champion me) {
         damage.getDamageWithBothModifiers();
-        System.out.println("Execute : " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

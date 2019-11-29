@@ -19,7 +19,6 @@ public class Rogue extends Champion {
     }
 
     public boolean critNow(Map map) {
-        if (critCycle % 3 == 0 && this.getTerrain(map) == 'W') System.out.println("Backstab crittt");
         return (critCycle % 3 == 0 && this.getTerrain(map) == 'W');
     }
 
