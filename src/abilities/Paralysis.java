@@ -17,7 +17,7 @@ public class Paralysis implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'W':
-                modifier = RogueModifiers.woods;
+                modifier = RogueModifiers.WOODS;
                 break;
             default:
                 modifier = 1.0f;
@@ -35,7 +35,7 @@ public class Paralysis implements Ability {
             numberOfincapacity = NumberConstants.NR6;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_pyromancer);
+                RogueModifiers.PARPYRO);
         cast(damage, pyromancer, me);
 
         // RESETEZ buff negativ
@@ -46,7 +46,7 @@ public class Paralysis implements Ability {
 
         int rotDamage = NumberConstants.NR40 + NumberConstants.NR10 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_pyromancer);
+                RogueModifiers.PARPYRO);
         int duration = 2;
         ArrayList<Integer> rotSpecs = new ArrayList<>();
         rotSpecs.add(numberOfincapacity);
@@ -62,7 +62,7 @@ public class Paralysis implements Ability {
             numberOfincapacity = NumberConstants.NR6;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_wizard);
+                RogueModifiers.PARWIZ);
         cast(damage, wizard, me);
 
         // RESETEZ buff negativ
@@ -73,7 +73,7 @@ public class Paralysis implements Ability {
 
         int rotDamage = NumberConstants.NR40 + NumberConstants.NR10 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_wizard);
+                RogueModifiers.PARWIZ);
         int duration = 2;
         ArrayList<Integer> rotSpecs = new ArrayList<>();
         rotSpecs.add(numberOfincapacity);
@@ -89,7 +89,7 @@ public class Paralysis implements Ability {
             numberOfincapacity = NumberConstants.NR6;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_knight);
+                RogueModifiers.PARKNI);
         cast(damage, knight, me);
 
         // RESETEZ buff negativ
@@ -100,7 +100,7 @@ public class Paralysis implements Ability {
 
         int rotDamage = NumberConstants.NR40 + NumberConstants.NR10 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_knight);
+                RogueModifiers.PARKNI);
         int duration = 2;
         ArrayList<Integer> rotSpecs = new ArrayList<>();
         rotSpecs.add(numberOfincapacity);
@@ -116,7 +116,7 @@ public class Paralysis implements Ability {
             numberOfincapacity = NumberConstants.NR6;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_rogue);
+                RogueModifiers.PARROGUE);
         cast(damage, rogue, me);
 
         // RESETEZ buff negativ
@@ -127,7 +127,7 @@ public class Paralysis implements Ability {
 
         int rotDamage = NumberConstants.NR40 + NumberConstants.NR10 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                RogueModifiers.paralysis_rogue);
+                RogueModifiers.PARROGUE);
         int duration = 2;
         ArrayList<Integer> rotSpecs = new ArrayList<>();
         rotSpecs.add(numberOfincapacity);

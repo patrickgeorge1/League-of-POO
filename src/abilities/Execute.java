@@ -15,7 +15,7 @@ public class Execute implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'L':
-                modifier = KnightModifiers.land;
+                modifier = KnightModifiers.LAND;
                 break;
             default:
                 modifier = 1.0f;
@@ -38,7 +38,7 @@ public class Execute implements Ability {
             baseDamage = victimCurrentHp;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.execute_rogue);
+                KnightModifiers.EXECUTEROGUE);
         cast(damage, rogue, me);
     }
 
@@ -56,7 +56,7 @@ public class Execute implements Ability {
             baseDamage = victimCurrentHp;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.execute_knight);
+                KnightModifiers.EXECUTEKNIGHT);
         cast(damage, knight, me);
     }
 
@@ -74,7 +74,7 @@ public class Execute implements Ability {
             baseDamage = victimCurrentHp;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.execute_wizard);
+                KnightModifiers.EXECUTEWIZ);
         cast(damage, wizard, me);
     }
 
@@ -92,7 +92,7 @@ public class Execute implements Ability {
             baseDamage = victimCurrentHp;
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.execute_pyromancer);
+                KnightModifiers.EXECUTEPYRO);
         cast(damage, pyromancer, me);
     }
 

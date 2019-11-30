@@ -15,7 +15,7 @@ public final class Drain implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'D':
-                modifier = WizardModifiers.desert;
+                modifier = WizardModifiers.DESERT;
                 break;
             default:
                 modifier = 1.0f;
@@ -28,7 +28,7 @@ public final class Drain implements Ability {
     public void between(final Champion me, final Rogue rogue, final Map map) {
         float procent = NumberConstants.NR2F + NumberConstants.NR05F * me.getLevel();
         float landModifier = this.getLandMofifier(me, map);
-        float raceMofifier = WizardModifiers.drain_rogue;
+        float raceMofifier = WizardModifiers.DRAINROGUE;
         int currentHp = rogue.getHp();
         int maxHp = rogue.maxHP();
         Damage damage = new Damage(1, 0, 0);
@@ -40,7 +40,7 @@ public final class Drain implements Ability {
     public void between(final Champion me, final Knight knight, final Map map) {
         float procent = NumberConstants.NR2F + NumberConstants.NR05F * me.getLevel();
         float landModifier = this.getLandMofifier(me, map);
-        float raceMofifier = WizardModifiers.drain_knight;
+        float raceMofifier = WizardModifiers.DRAINKNI;
         int currentHp = knight.getHp();
         int maxHp = knight.maxHP();
         Damage damage = new Damage(1, 0, 0);
@@ -52,7 +52,7 @@ public final class Drain implements Ability {
     public void between(final Champion me, final Wizard wizard, final Map map) {
         float procent = NumberConstants.NR2F + NumberConstants.NR05F * me.getLevel();
         float landModifier = this.getLandMofifier(me, map);
-        float raceMofifier = WizardModifiers.drain_wizard;
+        float raceMofifier = WizardModifiers.DRAINWIZ;
         int currentHp = wizard.getHp();
         int maxHp = wizard.maxHP();
         Damage damage = new Damage(1, 0, 0);
@@ -64,7 +64,7 @@ public final class Drain implements Ability {
     public void between(final Champion me, final Pyromancer pyromancer, final Map map) {
         float procent = NumberConstants.NR2F + NumberConstants.NR05F * me.getLevel();
         float landModifier = this.getLandMofifier(me, map);
-        float raceMofifier = WizardModifiers.drain_pyromancer;
+        float raceMofifier = WizardModifiers.DRAINPYRO;
         int currentHp = pyromancer.getHp();
         int maxHp = pyromancer.maxHP();
         Damage damage = new Damage(1, 0, 0);
@@ -75,7 +75,6 @@ public final class Drain implements Ability {
     @Override
     public void cast(final Damage damage, final Champion enemy, final Champion me) {
         damage.getDamageWithBonuses();
-//        System.out.println("drain - " + damage.getDamageWithBothModifiers());
         me.addDamage(damage);
     }
 }

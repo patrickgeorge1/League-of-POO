@@ -1,18 +1,20 @@
 package constants;
 
 public final class RogueModifiers {
-    public static final float backstab_rogue = 1.2f;
-    public static final float backstab_knight = 0.9f;
-    public static final float backstab_pyromancer = 1.25f;
-    public static final float backstab_wizard = 1.25f;
+    private RogueModifiers() {
+    }
+    public static final float BACKROGUE = 1.2f;
+    public static final float BACKKNI = 0.9f;
+    public static final float BACKPYRO = 1.25f;
+    public static final float BACKWIZ = 1.25f;
 
-    public static final float paralysis_rogue = 0.9f;
-    public static final float paralysis_knight = 0.8f;
-    public static final float paralysis_pyromancer = 1.2f;
-    public static final float paralysis_wizard = 1.25f;
+    public static final float PARROGUE = 0.9f;
+    public static final float PARKNI = 0.8f;
+    public static final float PARPYRO = 1.2f;
+    public static final float PARWIZ = 1.25f;
 
-    public static final float land = 1f;
-    public static final float volcanic = 1f;
-    public static final float desert = 1f;
-    public static final float woods = 1.15f;
+    public static final float LAND = 1f;
+    public static final float VOLCANIC = 1f;
+    public static final float DESERT = 1f;
+    public static final float WOODS = 1.15f;
 }

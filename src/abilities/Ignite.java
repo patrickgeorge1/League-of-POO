@@ -17,7 +17,7 @@ public class Ignite implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'V':
-                modifier = PyromancerModifiers.volcanic;
+                modifier = PyromancerModifiers.VOLCANIC;
                 break;
             default:
                 modifier = 1.0f;
@@ -30,12 +30,12 @@ public class Ignite implements Ability {
     public final void between(final Champion me, final Rogue rogue, final Map map) {
         int baseDamage = NumberConstants.NR150 + NumberConstants.NR20 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_rogue);
+                PyromancerModifiers.IGNITEROG);
         cast(damage, rogue, me);
 
         int rotDamage = NumberConstants.NR50 + NumberConstants.NR30 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_rogue);
+                PyromancerModifiers.IGNITEROG);
         int duration = 2;
         rogue.setNegativeBuff(new ArrayList<Integer>() {{ add(duration);
         add(rot.getDamageWithBothModifiers()); }});
@@ -45,12 +45,12 @@ public class Ignite implements Ability {
     public final void between(final Champion me, final Knight knight, final Map map) {
         int baseDamage = NumberConstants.NR150 + NumberConstants.NR20 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_knight);
+                PyromancerModifiers.IGNITEKNI);
         cast(damage, knight, me);
 
         int rotDamage = NumberConstants.NR50 + NumberConstants.NR30 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_knight);
+                PyromancerModifiers.IGNITEKNI);
         int duration = 2;
         knight.setNegativeBuff(new ArrayList<Integer>() {{ add(duration);
         add(rot.getDamageWithBothModifiers()); }});
@@ -60,12 +60,12 @@ public class Ignite implements Ability {
     public final void between(final Champion me, final Wizard wizard, final Map map) {
         int baseDamage = NumberConstants.NR150 + NumberConstants.NR20 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_wizard);
+                PyromancerModifiers.IGNITEWIZ);
         cast(damage, wizard, me);
 
         int rotDamage = NumberConstants.NR50 + NumberConstants.NR30 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_wizard);
+                PyromancerModifiers.IGNITEWIZ);
         int duration = 2;
         wizard.setNegativeBuff(new ArrayList<Integer>() {{ add(duration);
         add(rot.getDamageWithBothModifiers()); }});
@@ -75,12 +75,12 @@ public class Ignite implements Ability {
     public final void between(final Champion me, final Pyromancer pyromancer, final Map map) {
         int baseDamage = NumberConstants.NR150 + NumberConstants.NR20 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_pyromancer);
+                PyromancerModifiers.IGNITEPYRO);
         cast(damage, pyromancer, me);
 
         int rotDamage = NumberConstants.NR50 + NumberConstants.NR30 * me.getLevel();
         Damage rot = new Damage(rotDamage, getLandMofifier(me, map),
-                PyromancerModifiers.ignite_pyromancer);
+                PyromancerModifiers.IGNITEPYRO);
         int duration = 2;
         pyromancer.setNegativeBuff(new ArrayList<Integer>() {{ add(duration);
         add(rot.getDamageWithBothModifiers()); }});

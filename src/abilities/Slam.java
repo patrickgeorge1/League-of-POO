@@ -17,7 +17,7 @@ public class Slam implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'L':
-                modifier = KnightModifiers.land;
+                modifier = KnightModifiers.LAND;
                 break;
             default:
                 modifier = 1.0f;
@@ -30,7 +30,7 @@ public class Slam implements Ability {
     public final void between(final Champion me, final Pyromancer pyromancer, final Map map) {
         int baseDamage = NumberConstants.NR100 + NumberConstants.NR40 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.slam_pyromancer);
+                KnightModifiers.SLAMPYRO);
         cast(damage, pyromancer, me);
 
         pyromancer.setNegativeBuff(new ArrayList<Integer>());
@@ -41,7 +41,7 @@ public class Slam implements Ability {
     public final void between(final Champion me, final Wizard wizard, final Map map) {
         int baseDamage = NumberConstants.NR100 + NumberConstants.NR40 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.slam_wizard);
+                KnightModifiers.SLAMWIZ);
         cast(damage, wizard, me);
 
         wizard.setNegativeBuff(new ArrayList<Integer>());
@@ -52,7 +52,7 @@ public class Slam implements Ability {
     public final void between(final Champion me, final Knight knight, final Map map) {
         int baseDamage = NumberConstants.NR100 + NumberConstants.NR40 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.slam_knight);
+                KnightModifiers.SLAMKNIGHT);
         cast(damage, knight, me);
 
         knight.setNegativeBuff(new ArrayList<Integer>());
@@ -63,7 +63,7 @@ public class Slam implements Ability {
     public final void between(final Champion me, final Rogue rogue, final Map map) {
         int baseDamage = NumberConstants.NR100 + NumberConstants.NR40 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                KnightModifiers.slam_rogue);
+                KnightModifiers.SLAMROGUE);
         cast(damage, rogue, me);
 
         rogue.setNegativeBuff(new ArrayList<Integer>());

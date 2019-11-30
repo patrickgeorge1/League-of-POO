@@ -17,7 +17,7 @@ public class Deflect implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'D':
-                modifier = WizardModifiers.desert;
+                modifier = WizardModifiers.DESERT;
                 break;
             default:
                 modifier = 1.0f;
@@ -40,7 +40,7 @@ public class Deflect implements Ability {
         }
         int baseDamage = Math.round(deflectDamage * baseProcent);
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                WizardModifiers.deflect_pyromancer);
+                WizardModifiers.DEFPYRO);
         cast(damage, pyromancer, me);
     }
 
@@ -64,7 +64,7 @@ public class Deflect implements Ability {
         }
         int baseDamage = Math.round(deflectDamage * baseProcent);
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                WizardModifiers.deflect_knight);
+                WizardModifiers.DEFKNI);
         cast(damage, knight, me);
     }
 
@@ -82,14 +82,13 @@ public class Deflect implements Ability {
         }
         int baseDamage = Math.round(deflectDamage * baseProcent);
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                WizardModifiers.deflect_rogue);
+                WizardModifiers.DEFROGUE);
         cast(damage, rogue, me);
     }
 
     @Override
     public final void cast(final Damage damage, final Champion enemy, final Champion me) {
         damage.getDamageWithBothModifiersUpgraded();
-//        System.out.println("Deflect - " + damage.getDamageWithBothModifiersUpgraded());
         me.addDamage(damage);
     }
 }

@@ -15,7 +15,7 @@ public class Backstab implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'W':
-                modifier = RogueModifiers.woods;
+                modifier = RogueModifiers.WOODS;
                 break;
             default:
                 modifier = 1.0f;
@@ -37,7 +37,7 @@ public class Backstab implements Ability {
             baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.backstab_rogue);
+                RogueModifiers.BACKROGUE);
         cast(damage, rogue, me);
     }
 
@@ -48,7 +48,7 @@ public class Backstab implements Ability {
             baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.backstab_knight);
+                RogueModifiers.BACKKNI);
         cast(damage, knight, me);
     }
 
@@ -59,7 +59,7 @@ public class Backstab implements Ability {
             baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.backstab_wizard);
+                RogueModifiers.BACKWIZ);
         cast(damage, wizard, me);
     }
 
@@ -70,7 +70,7 @@ public class Backstab implements Ability {
             baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
         }
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                RogueModifiers.backstab_pyromancer);
+                RogueModifiers.BACKPYRO);
         cast(damage, pyromancer, me);
     }
 

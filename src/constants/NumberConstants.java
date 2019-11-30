@@ -1,6 +1,8 @@
 package constants;
 
 public final class NumberConstants {
+    private NumberConstants() {
+    }
     public static final int NR200 = 200;
     public static final int NR900 = 900;
     public static final int NR400 = 400;

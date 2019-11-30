@@ -16,7 +16,7 @@ public class Fireblast implements Ability {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'V':
-                modifier = PyromancerModifiers.volcanic;
+                modifier = PyromancerModifiers.VOLCANIC;
                 break;
             default:
                 modifier = 1.0f;
@@ -29,7 +29,7 @@ public class Fireblast implements Ability {
     public final void between(final Champion me, final Rogue rogue, final Map map) {
         int baseDamage = NumberConstants.NR350 + NumberConstants.NR50 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.fireblast_rogue);
+                PyromancerModifiers.FIREROGUE);
         cast(damage, rogue, me);
     }
 
@@ -37,7 +37,7 @@ public class Fireblast implements Ability {
     public final void between(final Champion me, final Knight knight, final Map map) {
         int baseDamage = NumberConstants.NR350 + NumberConstants.NR50 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.fireblast_knight);
+                PyromancerModifiers.FIREKNIG);
         cast(damage, knight, me);
     }
 
@@ -45,7 +45,7 @@ public class Fireblast implements Ability {
     public final void between(final Champion me, final Wizard wizard, final Map map) {
         int baseDamage = NumberConstants.NR350 + NumberConstants.NR50 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.fireblast_wizard);
+                PyromancerModifiers.FIREWIZ);
         cast(damage, wizard, me);
     }
 
@@ -53,7 +53,7 @@ public class Fireblast implements Ability {
     public final void between(final Champion me, final Pyromancer pyromancer, final Map map) {
         int baseDamage = NumberConstants.NR350 + NumberConstants.NR50 * me.getLevel();
         Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
-                PyromancerModifiers.fireblast_pyromancer);
+                PyromancerModifiers.FIREPYRO);
         cast(damage, pyromancer, me);
     }
 
