@@ -126,7 +126,7 @@ public class Game {
                 content += ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY() + "\n";
             }
         }
-//        System.out.println(content);
+        System.out.println(content);
         PrintWriter writer = new PrintWriter(pathToPrint, "UTF-8");
         writer.println(content);
         writer.close();

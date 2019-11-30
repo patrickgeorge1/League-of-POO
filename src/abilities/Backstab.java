@@ -1,13 +1,17 @@
 package abilities;
 
-import champions.*;
-import constants.PyromancerModifiers;
+import champions.Rogue;
+import champions.Champion;
+import champions.Knight;
+import champions.Wizard;
+import champions.Pyromancer;
+import constants.NumberConstants;
 import constants.RogueModifiers;
 import map.Map;
 import utils.Damage;
 
 public class Backstab implements Ability {
-    public float getLandMofifier (Champion me, Map map) {
+    public final float getLandMofifier(final Champion me, final Map map) {
         float modifier = 0;
         switch (me.getTerrain(map)) {
             case 'W':
@@ -20,40 +24,58 @@ public class Backstab implements Ability {
         return modifier;
     }
 
+    /**
+     * Rogue vs Rogue.
+     * @param me
+     * @param rogue
+     * @param map
+     */
     @Override
-    public void between(Champion me, Rogue rogue, Map map) {
-        int baseDamage = 200 + 20 * me.getLevel();
-        if (((Rogue) me).critNow(map)) baseDamage = Math.round(1.5f * baseDamage);
-        Damage damage = new Damage(baseDamage, getLandMofifier(me, map), RogueModifiers.backstab_rogue);
+    public final void between(final Champion me, final Rogue rogue, final Map map) {
+        int baseDamage = NumberConstants.NR200 + NumberConstants.NR20 * me.getLevel();
+        if (((Rogue) me).critNow(map)) {
+            baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
+        }
+        Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
+                RogueModifiers.backstab_rogue);
         cast(damage, rogue, me);
     }
 
     @Override
-    public void between(Champion me, Knight knight, Map map) {
-        int baseDamage = 200 + 20 * me.getLevel();
-        if (((Rogue) me).critNow(map)) baseDamage = Math.round(1.5f * baseDamage);
-        Damage damage = new Damage(baseDamage, getLandMofifier(me, map), RogueModifiers.backstab_knight);
+    public final void between(final Champion me, final Knight knight, final Map map) {
+        int baseDamage = NumberConstants.NR200 + NumberConstants.NR20 * me.getLevel();
+        if (((Rogue) me).critNow(map)) {
+            baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
+        }
+        Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
+                RogueModifiers.backstab_knight);
         cast(damage, knight, me);
     }
 
     @Override
-    public void between(Champion me, Wizard wizard, Map map) {
-        int baseDamage = 200 + 20 * me.getLevel();
-        if (((Rogue) me).critNow(map)) baseDamage = Math.round(1.5f * baseDamage);
-        Damage damage = new Damage(baseDamage, getLandMofifier(me, map), RogueModifiers.backstab_wizard);
+    public final void between(final Champion me, final Wizard wizard, final Map map) {
+        int baseDamage = NumberConstants.NR200 + NumberConstants.NR20 * me.getLevel();
+        if (((Rogue) me).critNow(map)) {
+            baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
+        }
+        Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
+                RogueModifiers.backstab_wizard);
         cast(damage, wizard, me);
     }
 
     @Override
-    public void between(Champion me, Pyromancer pyromancer, Map map) {
-        int baseDamage = 200 + 20 * me.getLevel();
-        if (((Rogue) me).critNow(map)) baseDamage = Math.round(1.5f * baseDamage);
-        Damage damage = new Damage(baseDamage, getLandMofifier(me, map), RogueModifiers.backstab_pyromancer);
+    public final void between(final Champion me, final Pyromancer pyromancer, final Map map) {
+        int baseDamage = NumberConstants.NR200 + NumberConstants.NR20 * me.getLevel();
+        if (((Rogue) me).critNow(map)) {
+            baseDamage = Math.round(NumberConstants.NR15 * baseDamage);
+        }
+        Damage damage = new Damage(baseDamage, getLandMofifier(me, map),
+                RogueModifiers.backstab_pyromancer);
         cast(damage, pyromancer, me);
     }
 
     @Override
-    public void cast(Damage damage, Champion enemy, Champion me) {
+    public final void cast(final Damage damage, final Champion enemy, final Champion me) {
         ((Rogue) me).increseCritCycle();
         damage.getDamageWithBothModifiers();
         me.addDamage(damage);
