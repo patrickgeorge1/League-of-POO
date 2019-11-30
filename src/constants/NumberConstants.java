@@ -2,10 +2,16 @@ package constants;
 
 public final class NumberConstants {
     public static final int NR200 = 200;
+    public static final int NR900 = 900;
+    public static final int NR400 = 400;
     public static final int NR350 = 350;
     public static final int NR150 = 150;
+    public static final int NR250 = 250;
     public static final int NR100 = 100;
+    public static final int NR500 = 500;
+    public static final int NR600 = 600;
     public static final int NR20 = 20;
+    public static final int NR80 = 80;
     public static final int NR3 = 3;
     public static final int NR6 = 6;
     public static final int NR10 = 10;

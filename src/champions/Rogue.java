@@ -3,57 +3,60 @@ package champions;
 import abilities.Ability;
 import abilities.Backstab;
 import abilities.Paralysis;
+import constants.NumberConstants;
 import map.Map;
 
 public class Rogue extends Champion {
     private int critCycle;
-    public Rogue(int id) {
+    public Rogue(final int id) {
         super(id);
         setPriorityToAttck(1);
         resetHP();
         critCycle = 0;
     }
 
-    public void increseCritCycle() {
+    public final void increseCritCycle() {
         this.critCycle++;
     }
 
-    public boolean critNow(Map map) {
-        return (critCycle % 3 == 0 && this.getTerrain(map) == 'W');
+    public final boolean critNow(final Map map) {
+        return (critCycle % NumberConstants.NR3 == 0 && this.getTerrain(map) == 'W');
     }
 
     @Override
-    public void resetHP() {
-        this.setHp(600 + 40 * this.getLevel());
+    public final void resetHP() {
+        this.setHp(NumberConstants.NR600 + NumberConstants.NR40 * this.getLevel());
     }
 
     @Override
-    public int maxHP() {
-        return 600 + 40 * this.getLevel();
+    public final int maxHP() {
+        return NumberConstants.NR600 + NumberConstants.NR40 * this.getLevel();
     }
 
     @Override
-    public void fight(Champion enemy, Map map) {
+    public final void fight(final Champion enemy, final Map map) {
         Backstab backstab = new Backstab();
         Paralysis paralysis = new Paralysis();
         enemy.accept(backstab, map);
         enemy.accept(paralysis, map);
     }
 
-    public int getCritCycle() {
+    public final int getCritCycle() {
         return critCycle;
     }
 
-    public void setCritCycle(int critCycle) {
+    public final void setCritCycle(final int critCycle) {
         this.critCycle = critCycle;
     }
 
-    public void accept(Ability ability, Map map) {
+    public final void accept(final Ability ability, final Map map) {
         ability.between(getEnemy(), this, map);
     }
 
     @Override
-    public String toString() {
-        return "R = " + "<ID:" + Integer.toString(this.getId()) + " HP:" + Integer.toString(this.getHp()) + " pos (" + this.getPosition().getX() + ", " + this.getPosition().getY() + ")>";
+    public final String toString() {
+        return "R = " + "<ID:" + Integer.toString(this.getId())
+                + " HP:" + Integer.toString(this.getHp()) + " pos (" + this.getPosition().getX()
+                + ", " + this.getPosition().getY() + ")>";
     }
 }
