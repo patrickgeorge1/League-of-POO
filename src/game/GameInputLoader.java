@@ -11,7 +11,7 @@ public final class GameInputLoader {
     private String pathIN;
     private String pathOUT;
 
-    public GameInputLoader(String pathIN, String pathOUT) {
+    public GameInputLoader(final String pathIN, final String pathOUT) {
         this.pathIN = pathIN;
         this.pathOUT = pathOUT;
     }
@@ -51,7 +51,8 @@ public final class GameInputLoader {
                 movements.add(line);
             }
 
-            return new Game(numberOfMovements, numberOfPlayers, numberOfLines, numberOfColumns, terrain, players, movements);
+            return new Game(numberOfMovements, numberOfPlayers, numberOfLines,
+                    numberOfColumns, terrain, players, movements);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +65,7 @@ public final class GameInputLoader {
         return pathIN;
     }
 
-    public void setPathIN(String pathIN) {
+    public void setPathIN(final String pathIN) {
         this.pathIN = pathIN;
     }
 
@@ -72,7 +73,7 @@ public final class GameInputLoader {
         return pathOUT;
     }
 
-    public void setPathOUT(String pathOUT) {
+    public void setPathOUT(final String pathOUT) {
         this.pathOUT = pathOUT;
     }
 }

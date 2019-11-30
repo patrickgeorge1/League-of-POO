@@ -1,28 +1,29 @@
 package factories;
 
-import champions.*;
+import champions.Champion;
+import champions.Wizard;
+import champions.Rogue;
+import champions.Pyromancer;
+import champions.Knight;
 import utils.Position;
-
-import javax.print.attribute.standard.NumberUp;
-import javax.swing.*;
 import java.util.HashMap;
 
-public class ChampFactory {
+public final class ChampFactory {
     private static ChampFactory instance = null;
     private static HashMap<Integer, Champion> dictOfChamps = new HashMap<>();
     private static HashMap<Integer, String> dictOfDefinition = new HashMap<>();
-    private ChampFactory() {}
+    private ChampFactory() {
+    }
 
     public static ChampFactory getInstance() {
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new ChampFactory();
             dictOfChamps = new HashMap<>();
         }
         return instance;
     }
 
-    public void createChampion(int id, char type, Position position) {
+    public void createChampion(final int id, final char type, final Position position) {
         Champion champ;
         switch (type) {
             case 'K':
@@ -46,16 +47,18 @@ public class ChampFactory {
         dictOfChamps.put(id, champ);
     }
 
-    public Champion getChampById(int id) {
+    public Champion getChampById(final int id) {
         return dictOfChamps.get(id);
     }
 
-    public String getChampionForOutput(int id) { return dictOfDefinition.get(id); }
+    public String getChampionForOutput(final int id) {
+        return dictOfDefinition.get(id);
+    }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for(Integer key:dictOfChamps.keySet()) {
+        for (Integer key:dictOfChamps.keySet()) {
             result.append(" | ");
             result.append(dictOfChamps.get(key));
             result.append(" | ");
@@ -68,7 +71,7 @@ public class ChampFactory {
         return dictOfChamps;
     }
 
-    public static void setDictOfChamps(HashMap<Integer, Champion> dictOfChamps) {
+    public static void setDictOfChamps(final HashMap<Integer, Champion> dictOfChamps) {
         ChampFactory.dictOfChamps = dictOfChamps;
     }
 }

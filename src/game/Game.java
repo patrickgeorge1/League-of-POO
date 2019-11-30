@@ -4,7 +4,8 @@ import champions.Champion;
 import factories.ChampFactory;
 import map.Map;
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,9 @@ public class Game {
     private ArrayList<String> movements;
     private Map world;
 
-    public Game(int roundNumber, int playerNumber, int numLines, int numColumns,  ArrayList<String> terrain, ArrayList<String> players, ArrayList<String> movements) {
+    public Game(final int roundNumber, final int playerNumber, final int numLines,
+                final int numColumns,  final ArrayList<String> terrain,
+                final ArrayList<String> players, final ArrayList<String> movements) {
         this.roundNumber = roundNumber;
         this.playerNumber = playerNumber;
         this.movements = movements;
@@ -23,7 +26,7 @@ public class Game {
         this.world.constructMap(terrain, players);
     }
 
-    public void playRound(String movement) {
+    public final void playRound(final String movement) {
         // fac mutarile
         for (int i = 0; i < movement.length(); i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
@@ -42,7 +45,7 @@ public class Game {
             player.clearDamage();
 
             // traiesc, nu am luptat, am inamic in casuta
-            if(player.getHp() > 0 && (!fought.contains(i)) && player.getEnemy() != null) {
+            if (player.getHp() > 0 && (!fought.contains(i)) && player.getEnemy() != null) {
                 fought.add(i);
                 fought.add(player.getEnemy().getId());
 
@@ -62,11 +65,15 @@ public class Game {
         }
     }
 
-    public void combat2Champs(Champion player, Champion enemy) {
+    public final void combat2Champs(final Champion player, final Champion enemy) {
         // in caz ca erau inamici dar i a omorat root ul
         if (player.getHp() <= 0 || enemy.getHp() <= 0) {
-            if (player.getHp() <= 0) player.deleteMeFromMap(world);
-            if (enemy.getHp() <= 0) enemy.deleteMeFromMap(world);
+            if (player.getHp() <= 0) {
+                player.deleteMeFromMap(world);
+            }
+            if (enemy.getHp() <= 0) {
+                enemy.deleteMeFromMap(world);
+            }
             player.setEnemy(null);
             enemy.setEnemy(null);
             return;
@@ -85,9 +92,11 @@ public class Game {
             player.setEnemy(null);
             player.deleteMeFromMap(world);
 
-            int enemy_old_level = enemy.getLevel();
+            int enemyOldLevel = enemy.getLevel();
             enemy.setXp(enemy.getXp() + enemy.getXpFrom(player));
-            if (enemy_old_level < enemy.getLevel()) enemy.resetHP();
+            if (enemyOldLevel < enemy.getLevel()) {
+                enemy.resetHP();
+            }
         }
 
         if (enemy.getHp() <= 0 && player.getHp() > 0) {
@@ -95,9 +104,11 @@ public class Game {
             player.setEnemy(null);
             enemy.deleteMeFromMap(world);
 
-            int player_old_level = player.getLevel();
+            int playerOldLevel = player.getLevel();
             player.setXp(player.getXp() + player.getXpFrom(enemy));
-            if (player_old_level < player.getLevel()) player.resetHP();
+            if (playerOldLevel < player.getLevel()) {
+                player.resetHP();
+            }
         }
 
         if (enemy.getHp() <= 0 && player.getHp() <= 0) {
@@ -108,25 +119,24 @@ public class Game {
         }
     }
 
-    public void play(String path, String pathToPrint) throws IOException{
-        int roundNumber = 0;
+    public final void play(final String path, final String pathToPrint) throws IOException {
+        int roundNumberNow = 0;
         for (String movement : movements) {
             playRound(movement);
-            roundNumber++;
+            roundNumberNow++;
         }
         String content = "";
         for (int i = 0; i < playerNumber; i++) {
             Champion player = ChampFactory.getInstance().getChampById(i);
             if (player.getHp() <= 0) {
-//                System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " dead");
                 content += ChampFactory.getInstance().getChampionForOutput(i) + " dead\n";
-            }
-            else {
-//                System.out.println(ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY());
-                content += ChampFactory.getInstance().getChampionForOutput(i) + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp() + " " + player.getPosition().getX() + " " + player.getPosition().getY() + "\n";
+            } else {
+                content += ChampFactory.getInstance().getChampionForOutput(i)
+                        + " " + player.getLevel() + " " + player.getXp() + " " + player.getHp()
+                        + " " + player.getPosition().getX()
+                        + " " + player.getPosition().getY() + "\n";
             }
         }
-        System.out.println(content);
         PrintWriter writer = new PrintWriter(pathToPrint, "UTF-8");
         writer.println(content);
         writer.close();
@@ -136,32 +146,32 @@ public class Game {
 
 
 
-    public int getRoundNumber() {
+    public final int getRoundNumber() {
         return roundNumber;
     }
 
-    public void setRoundNumber(int roundNumber) {
+    public final void setRoundNumber(final int roundNumber) {
         this.roundNumber = roundNumber;
     }
 
-    public int getPlayerNumber() {
+    public final int getPlayerNumber() {
         return playerNumber;
     }
 
-    public void setPlayerNumber(int playerNumber) {
+    public final void setPlayerNumber(final int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public Map getWorld() {
+    public final Map getWorld() {
         return world;
     }
 
-    public void setWorld(Map world) {
+    public final void setWorld(final Map world) {
         this.world = world;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder result = new StringBuilder();
         result.append("num of rounds: ");
         result.append(Integer.toString(this.roundNumber));

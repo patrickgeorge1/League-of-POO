@@ -25,6 +25,7 @@ public final class NumberConstants {
     public static final float NR15 = 1.5f;
     public static final float NR100F = 100.0f;
     public static final float NR2F = 0.2f;
+    public static final float NR3F = 0.3f;
     public static final float NR05F = 0.05f;
 
 }

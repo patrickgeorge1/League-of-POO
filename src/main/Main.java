@@ -1,16 +1,16 @@
 package main;
 
-import champions.Champion;
-import factories.ChampFactory;
+
 import game.Game;
 import game.GameInputLoader;
-
 import java.io.IOException;
-import java.util.HashMap;
 
-public class Main {
 
-    public static void main(String[] args) throws IOException {
+public final class Main {
+    private Main() {
+    }
+
+    public static void main(final String[] args) throws IOException {
 
 	// write your code here
         String path = args[0];

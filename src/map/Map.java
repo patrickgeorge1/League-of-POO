@@ -14,20 +14,22 @@ public class Map {
     private int numLines;
     private int numColumns;
 
-    public Map(int numLines, int numColumns) {
+    public Map(final int numLines, final int numColumns) {
         this.numLines = numLines;
         this.numColumns = numColumns;
 
-        for(int i = 0; i < numLines; i++)
+        for (int i = 0; i < numLines; i++) {
             map.add(new ArrayList<MapCell>());
-
-        for(int i = 0; i < numLines; i++)
-            for(int j = 0; j < numColumns; j++)
+        }
+        for (int i = 0; i < numLines; i++) {
+            for (int j = 0; j < numColumns; j++) {
                 map.get(i).add(new MapCell());
+            }
+        }
     }
 
     // Construct map of terrains and players
-    public void constructMap(ArrayList<String> lines, ArrayList<String> players) {
+    public final void constructMap(final ArrayList<String> lines, final ArrayList<String> players) {
         int i = 0;
         for (String line:lines) {
             for (int j = 0; j < line.length(); j++) {
@@ -40,18 +42,18 @@ public class Map {
         for (String player:players) {
             String[] data = player.split(" ");
             List<String> dataToString = Arrays.asList(data);
-            char PlayerType = dataToString.get(0).charAt(0);
+            char playerType = dataToString.get(0).charAt(0);
             int line = Integer.parseInt(dataToString.get(1));
             int col = Integer.parseInt(dataToString.get(2));
             Position position = new Position(line, col);
-            ChampFactory.getInstance().createChampion(i, PlayerType, position);
+            ChampFactory.getInstance().createChampion(i, playerType, position);
             this.map.get(line).get(col).addPlayer(i);
             i++;
         }
     }
 
     // apelez move(id, champ.whereShouldImove("w"))
-    public void move(int id, ArrayList<TupleInt> coord) {
+    public final void move(final int id, final ArrayList<TupleInt> coord) {
         Champion me = ChampFactory.getInstance().getChampById(id);
         // doar daca nu s mort ma pot misca
         if (me.getHp() > 0) {
@@ -71,59 +73,59 @@ public class Map {
 
                 // ajunge langa un inamic
                 if (!map.get(xx).get(yy).getPlayers().isEmpty()) {
-                    int EnemyId = map.get(xx).get(yy).getPlayers().get(0);
-                    Champion enemy = ChampFactory.getInstance().getChampById(EnemyId);
+                    int enemyId = map.get(xx).get(yy).getPlayers().get(0);
+                    Champion enemy = ChampFactory.getInstance().getChampById(enemyId);
                     me.setEnemy(enemy);
                     enemy.setEnemy(me);
                 }
                 map.get(xx).get(yy).getPlayers().add(id);
-                Position new_positon = new Position(xx, yy);
-                me.setPosition(new_positon);
+                Position newPositon = new Position(xx, yy);
+                me.setPosition(newPositon);
             }
         }
     }
 
     // remove the champion from map
-    public void removeChampionFromMap(int id) {
+    public final void removeChampionFromMap(final int id) {
         Champion me = ChampFactory.getInstance().getChampById(id);
         int x = me.getPosition().getX();
         int y = me.getPosition().getY();
         map.get(x).get(y).getPlayers().remove(Integer.valueOf(id));
     }
 
-    public char getTerrain(int x, int y) {
+    public final char getTerrain(final int x, final int y) {
         return map.get(x).get(y).getType();
     }
 
-    public ArrayList<ArrayList<MapCell>> getMap() {
+    public final ArrayList<ArrayList<MapCell>> getMap() {
         return map;
     }
 
-    public void setMap(ArrayList<ArrayList<MapCell>> map) {
+    public final void setMap(final ArrayList<ArrayList<MapCell>> map) {
         this.map = map;
     }
 
-    public int getNumLines() {
+    public final int getNumLines() {
         return numLines;
     }
 
-    public void setNumLines(int numLines) {
+    public final void setNumLines(final int numLines) {
         this.numLines = numLines;
     }
 
-    public int getNumColumns() {
+    public final int getNumColumns() {
         return numColumns;
     }
 
-    public void setNumColumns(int numColumns) {
+    public final void setNumColumns(final int numColumns) {
         this.numColumns = numColumns;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder output = new StringBuilder();
-        for(ArrayList<MapCell> line:this.map) {
-            for(MapCell cell:line) {
+        for (ArrayList<MapCell> line:this.map) {
+            for (MapCell cell:line) {
                 String insider = cell.toString() + " ";
                 output.append(insider);
             }

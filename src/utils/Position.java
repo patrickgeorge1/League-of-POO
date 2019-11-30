@@ -4,29 +4,29 @@ public class Position {
     private int x;
     private int y;
 
-    public Position(int x, int y) {
+    public Position(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void updatePosition(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public final void updatePosition(final int xx, final int yy) {
+        this.x = xx;
+        this.y = yy;
     }
 
-    public int getX() {
+    public final int getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public final void setX(final int x) {
         this.x = x;
     }
 
-    public int getY() {
+    public final int getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public final void setY(final int y) {
         this.y = y;
     }
 }

@@ -1,7 +1,5 @@
 package map;
 
-import champions.Champion;
-
 import java.util.ArrayList;
 
 public class MapCell {
@@ -11,33 +9,33 @@ public class MapCell {
     public MapCell() {
     }
 
-    public MapCell(char type) {
+    public MapCell(final char type) {
         this.type = type;
         players = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getPlayers() {
+    public final ArrayList<Integer> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Integer> players) {
+    public final void setPlayers(final ArrayList<Integer> players) {
         this.players = players;
     }
 
-    public char getType() {
+    public final char getType() {
         return type;
     }
 
-    public void setType(char type) {
+    public final void setType(final char type) {
         this.type = type;
     }
 
-    public void addPlayer(Integer champ) {
+    public final void addPlayer(final Integer champ) {
         this.players.add(champ);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder output = new StringBuilder();
         String insider = "( " + this.type + " - { ";
         output.append(insider);
